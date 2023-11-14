@@ -1,6 +1,7 @@
 package christmas.basket.domain;
 
 import christmas.menu.domain.Menu;
+import christmas.menu.domain.MenuFixture;
 import christmas.menu.domain.MenuType;
 import christmas.menu.domain.TestMenu;
 import org.junit.jupiter.api.DisplayName;
@@ -9,9 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +22,7 @@ class BasketTest {
     @MethodSource("provideMenusAndTotalPrice")
     void calculateTotalPrice(List<Integer> prices, int expectedTotalPrice) {
         // given
-        List<Menu> menus = provideMenusByPrice(prices);
+        List<Menu> menus = MenuFixture.provideMenusByPrice(prices);
         Basket basket = new Basket(menus);
 
         // when
@@ -56,14 +55,5 @@ class BasketTest {
                 Arguments.of(List.of(1000, 2000, 3000, 4000), 10000),
                 Arguments.of(List.of(), 0)
         );
-    }
-
-    private List<Menu> provideMenusByPrice(List<Integer> prices) {
-        List<Menu> menus = new ArrayList<>();
-        for (int price : prices) {
-            menus.add(new TestMenu(price));
-        }
-
-        return menus;
     }
 }

@@ -2,6 +2,7 @@ package christmas.discount.domain;
 
 import christmas.basket.domain.Basket;
 import christmas.menu.domain.Menu;
+import christmas.menu.domain.MenuFixture;
 import christmas.menu.domain.MenuType;
 import christmas.menu.domain.TestMenu;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +28,7 @@ class WeekendDiscountPolicyTest {
         // given
         Supplier<LocalDate> weekend = () -> LocalDate.of(2023, 12, 1);
         DiscountPolicy discountPolicy = new WeekendDiscountPolicy(weekend);
-        Basket basket = new Basket(provideMenuByType(menuTypes));
+        Basket basket = new Basket(MenuFixture.provideMenuByType(menuTypes));
 
         // when
         int actualDiscountPrice = discountPolicy.discount(basket);
@@ -42,7 +43,7 @@ class WeekendDiscountPolicyTest {
         // given
         Supplier<LocalDate> weekday = () -> LocalDate.of(2023, 12, 3);
         DiscountPolicy discountPolicy = new WeekendDiscountPolicy(weekday);
-        Basket basket = new Basket(provideMenuByType(List.of(
+        Basket basket = new Basket(MenuFixture.provideMenuByType(List.of(
                 MenuType.MAIN_DISH,
                 MenuType.MAIN_DISH
         )));
@@ -62,11 +63,5 @@ class WeekendDiscountPolicyTest {
         );
     }
 
-    private List<Menu> provideMenuByType(List<MenuType> menuTypes) {
-        List<Menu> menu = new ArrayList<>(menuTypes.size());
-        for (MenuType menuType : menuTypes) {
-            menu.add(new TestMenu(menuType));
-        }
-        return menu;
-    }
+
 }
