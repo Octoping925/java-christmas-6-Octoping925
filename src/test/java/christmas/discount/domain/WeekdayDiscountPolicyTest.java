@@ -40,8 +40,8 @@ class WeekdayDiscountPolicyTest {
     @Test
     void discount_with_weekend() {
         // given
-        Supplier<LocalDate> weekday = () -> LocalDate.of(2023, 12, 1);
-        DiscountPolicy discountPolicy = new WeekdayDiscountPolicy(weekday);
+        Supplier<LocalDate> weekend = () -> LocalDate.of(2023, 12, 1);
+        DiscountPolicy discountPolicy = new WeekdayDiscountPolicy(weekend);
         Basket basket = new Basket(provideMenuByType(List.of(
                 MenuType.DESSERT,
                 MenuType.DESSERT
