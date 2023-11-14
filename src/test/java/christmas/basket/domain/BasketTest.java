@@ -43,10 +43,8 @@ class BasketTest {
         Menu menu4 = new TestMenu(MenuType.DESSERT);
         Basket basket = new Basket(List.of(menu1, menu2, menu3, menu4));
 
-        Predicate<Menu> isDrink = menu -> menu.getMenuType() == MenuType.DRINK;
-
         // when
-        List<Menu> searchResult = basket.searchMenu(isDrink);
+        List<Menu> searchResult = basket.searchMenu(Menu::isDrink);
 
         // then
         assertThat(searchResult).contains(menu2, menu3);

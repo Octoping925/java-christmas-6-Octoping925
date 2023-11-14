@@ -19,7 +19,11 @@ public abstract class Menu {
         return price;
     }
 
-    public MenuType getMenuType() {
-        return menuType;
+    public boolean isDessert() {
+        return menuType == MenuType.DESSERT;
+    }
+
+    public boolean isDrink() {
+        return menuType == MenuType.DRINK;
     }
 }
