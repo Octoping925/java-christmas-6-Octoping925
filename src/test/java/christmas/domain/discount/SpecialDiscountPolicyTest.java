@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +23,7 @@ class SpecialDiscountPolicyTest {
         // given
         Supplier<LocalDate> currentDateSupplier = () -> LocalDate.of(2023, 12, day);
         DiscountPolicy discountPolicy = new SpecialDiscountPolicy(currentDateSupplier);
-        Basket basket = new Basket(List.of(Menu.BARBEQUE_RIB));
+        Basket basket = new Basket(Map.of(Menu.BARBEQUE_RIB, 1));
 
         // when
         int discountPrice = discountPolicy.discount(basket);
@@ -37,7 +38,7 @@ class SpecialDiscountPolicyTest {
         // given
         Supplier<LocalDate> currentDateSupplier = () -> LocalDate.of(2023, 12, 1);
         DiscountPolicy discountPolicy = new SpecialDiscountPolicy(currentDateSupplier);
-        Basket basket = new Basket(List.of(Menu.BARBEQUE_RIB));
+        Basket basket = new Basket(Map.of(Menu.BARBEQUE_RIB, 1));
 
         // when
         int discountPrice = discountPolicy.discount(basket);

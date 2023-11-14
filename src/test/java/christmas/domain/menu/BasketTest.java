@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,10 +18,10 @@ class BasketTest {
     @Test
     void calculateTotalPrice() {
         // given
-        List<Menu> menus = List.of(
-                Menu.CHOCOLATE_CAKE,
-                Menu.BARBEQUE_RIB,
-                Menu.ICECREAM
+        Map<Menu, Integer> menus = Map.of(
+                Menu.CHOCOLATE_CAKE, 1,
+                Menu.BARBEQUE_RIB, 1,
+                Menu.ICECREAM, 1
         );
 
         Basket basket = new Basket(menus);
@@ -36,17 +37,16 @@ class BasketTest {
     @Test
     void searchMenu() {
         // given
-        Basket basket = new Basket(List.of(
-                Menu.CHOCOLATE_CAKE,
-                Menu.BARBEQUE_RIB,
-                Menu.BARBEQUE_RIB,
-                Menu.RED_WINE
+        Basket basket = new Basket(Map.of(
+                Menu.CHOCOLATE_CAKE, 1,
+                Menu.BARBEQUE_RIB, 2,
+                Menu.RED_WINE, 1
         ));
 
         // when
-        List<Menu> searchResult = basket.searchMenu(Menu::isDrink);
+        Map<Menu, Integer> searchResult = basket.searchMenu(Menu::isDrink);
 
         // then
-        assertThat(searchResult).contains(Menu.RED_WINE);
+        assertThat(searchResult).containsEntry(Menu.RED_WINE, 1);
     }
 }

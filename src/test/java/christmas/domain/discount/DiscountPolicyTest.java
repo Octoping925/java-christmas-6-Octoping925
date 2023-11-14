@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +24,7 @@ class DiscountPolicyTest {
     @Test
     void discount() {
         // given
-        Basket basket = new Basket(List.of(Menu.SEAFOOD_PASTA));
+        Basket basket = new Basket(Map.of(Menu.SEAFOOD_PASTA, 1));
 
         // when
         int discountPrice = discountPolicy.discount(basket);
@@ -36,7 +37,7 @@ class DiscountPolicyTest {
     @Test
     void discount_with_low_price() {
         // given
-        Basket basket = new Basket(List.of(Menu.CAESAR_SALAD));
+        Basket basket = new Basket(Map.of(Menu.CAESAR_SALAD, 1));
 
         // when
         int discountPrice = discountPolicy.discount(basket);

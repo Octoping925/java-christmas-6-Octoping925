@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,9 +27,8 @@ class ChristmasDiscountPolicyTest {
         Supplier<LocalDate> beforeChristmas = () -> LocalDate.of(2023, month, day);
         ChristmasDiscountPolicy discountPolicy = new ChristmasDiscountPolicy(beforeChristmas);
 
-        Basket basket = new Basket(List.of(
-                Menu.SEAFOOD_PASTA,
-                Menu.SEAFOOD_PASTA
+        Basket basket = new Basket(Map.of(
+                Menu.SEAFOOD_PASTA, 2
         ));
 
         // when
@@ -46,9 +45,8 @@ class ChristmasDiscountPolicyTest {
         Supplier<LocalDate> afterChristmas = () -> LocalDate.of(2023, 12, 26);
         ChristmasDiscountPolicy discountPolicy = new ChristmasDiscountPolicy(afterChristmas);
 
-        Basket basket = new Basket(List.of(
-                Menu.SEAFOOD_PASTA,
-                Menu.SEAFOOD_PASTA
+        Basket basket = new Basket(Map.of(
+                Menu.SEAFOOD_PASTA, 2
         ));
 
         // when

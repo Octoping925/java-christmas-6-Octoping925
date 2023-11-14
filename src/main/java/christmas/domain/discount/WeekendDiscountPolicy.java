@@ -5,6 +5,7 @@ import christmas.domain.menu.Menu;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class WeekendDiscountPolicy extends DiscountPolicy {
@@ -27,7 +28,10 @@ public class WeekendDiscountPolicy extends DiscountPolicy {
     }
 
     private int getMainDishCount(Basket basket) {
-        return basket.searchMenu(Menu::isMainDish).size();
+        return basket.searchMenu(Menu::isMainDish).values()
+                .stream()
+                .mapToInt(i -> i)
+                .sum();
     }
 
     private boolean isWeekend(LocalDate now) {

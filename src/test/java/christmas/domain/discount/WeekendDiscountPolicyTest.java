@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -21,7 +22,7 @@ class WeekendDiscountPolicyTest {
     @DisplayName("오늘이 주말(금,토)이면 메인 메뉴 1개당 2023원을 할인한다")
     @ParameterizedTest
     @MethodSource("provideMenuTypes")
-    void discount_with_weekday(List<Menu> menus, int expectedDiscountPrice) {
+    void discount_with_weekday(Map<Menu, Integer> menus, int expectedDiscountPrice) {
         // given
         Supplier<LocalDate> weekend = () -> LocalDate.of(2023, 12, 1);
         DiscountPolicy discountPolicy = new WeekendDiscountPolicy(weekend);
@@ -40,9 +41,8 @@ class WeekendDiscountPolicyTest {
         // given
         Supplier<LocalDate> weekday = () -> LocalDate.of(2023, 12, 3);
         DiscountPolicy discountPolicy = new WeekendDiscountPolicy(weekday);
-        Basket basket = new Basket(List.of(
-                Menu.BARBEQUE_RIB,
-                Menu.BARBEQUE_RIB
+        Basket basket = new Basket(Map.of(
+                Menu.BARBEQUE_RIB, 2
         ));
 
         // when
@@ -54,9 +54,9 @@ class WeekendDiscountPolicyTest {
 
     private static Stream<Arguments> provideMenuTypes() {
         return Stream.of(
-                Arguments.of(List.of(Menu.BARBEQUE_RIB, Menu.BARBEQUE_RIB, Menu.CHAMPAGNE), 2023 * 2),
-                Arguments.of(List.of(Menu.BARBEQUE_RIB, Menu.BARBEQUE_RIB,Menu.BARBEQUE_RIB), 2023 * 3),
-                Arguments.of(List.of(Menu.CHOCOLATE_CAKE), 0)
+                Arguments.of(Map.of(Menu.BARBEQUE_RIB, 2, Menu.CHAMPAGNE, 1), 2023 * 2),
+                Arguments.of(Map.of(Menu.BARBEQUE_RIB, 3), 2023 * 3),
+                Arguments.of(Map.of(Menu.CHOCOLATE_CAKE, 1), 0)
         );
     }
 
