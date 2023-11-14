@@ -1,7 +1,7 @@
 package christmas.domain.discount;
 
 import christmas.domain.menu.Basket;
-import christmas.domain.menu.MenuFixture;
+import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,11 +21,11 @@ class WeekendDiscountPolicyTest {
     @DisplayName("오늘이 주말(금,토)이면 메인 메뉴 1개당 2023원을 할인한다")
     @ParameterizedTest
     @MethodSource("provideMenuTypes")
-    void discount_with_weekday(List<MenuType> menuTypes, int expectedDiscountPrice) {
+    void discount_with_weekday(List<Menu> menus, int expectedDiscountPrice) {
         // given
         Supplier<LocalDate> weekend = () -> LocalDate.of(2023, 12, 1);
         DiscountPolicy discountPolicy = new WeekendDiscountPolicy(weekend);
-        Basket basket = new Basket(MenuFixture.provideMenuByType(menuTypes));
+        Basket basket = new Basket(menus);
 
         // when
         int actualDiscountPrice = discountPolicy.discount(basket);
@@ -40,10 +40,10 @@ class WeekendDiscountPolicyTest {
         // given
         Supplier<LocalDate> weekday = () -> LocalDate.of(2023, 12, 3);
         DiscountPolicy discountPolicy = new WeekendDiscountPolicy(weekday);
-        Basket basket = new Basket(MenuFixture.provideMenuByType(List.of(
-                MenuType.MAIN_DISH,
-                MenuType.MAIN_DISH
-        )));
+        Basket basket = new Basket(List.of(
+                Menu.BARBEQUE_RIB,
+                Menu.BARBEQUE_RIB
+        ));
 
         // when
         int actualDiscountPrice = discountPolicy.discount(basket);
@@ -54,9 +54,9 @@ class WeekendDiscountPolicyTest {
 
     private static Stream<Arguments> provideMenuTypes() {
         return Stream.of(
-                Arguments.of(List.of(MenuType.MAIN_DISH, MenuType.MAIN_DISH, MenuType.APPETIZER), 2023 * 2),
-                Arguments.of(List.of(MenuType.MAIN_DISH, MenuType.MAIN_DISH, MenuType.MAIN_DISH), 2023 * 3),
-                Arguments.of(List.of(MenuType.DESSERT), 0)
+                Arguments.of(List.of(Menu.BARBEQUE_RIB, Menu.BARBEQUE_RIB, Menu.CHAMPAGNE), 2023 * 2),
+                Arguments.of(List.of(Menu.BARBEQUE_RIB, Menu.BARBEQUE_RIB,Menu.BARBEQUE_RIB), 2023 * 3),
+                Arguments.of(List.of(Menu.CHOCOLATE_CAKE), 0)
         );
     }
 

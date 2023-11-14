@@ -1,7 +1,7 @@
 package christmas.domain.discount;
 
 import christmas.domain.menu.Basket;
-import christmas.domain.menu.TestMenu;
+import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,10 +23,7 @@ class DiscountPolicyTest {
     @Test
     void discount() {
         // given
-        Basket basket = new Basket(List.of(
-                new TestMenu(10000),
-                new TestMenu(10000)
-        ));
+        Basket basket = new Basket(List.of(Menu.SEAFOOD_PASTA));
 
         // when
         int discountPrice = discountPolicy.discount(basket);
@@ -39,9 +36,7 @@ class DiscountPolicyTest {
     @Test
     void discount_with_low_price() {
         // given
-        Basket basket = new Basket(List.of(
-                new TestMenu(1000)
-        ));
+        Basket basket = new Basket(List.of(Menu.CAESAR_SALAD));
 
         // when
         int discountPrice = discountPolicy.discount(basket);

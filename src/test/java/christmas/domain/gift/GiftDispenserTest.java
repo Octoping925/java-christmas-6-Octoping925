@@ -1,8 +1,7 @@
 package christmas.domain.gift;
 
 import christmas.domain.menu.Basket;
-import christmas.domain.gift.GiftDispenser;
-import christmas.domain.menu.TestMenu;
+import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,9 @@ class GiftDispenserTest {
         // given
         GiftDispenser dispenser = new GiftDispenser();
         Basket basket = new Basket(List.of(
-                new TestMenu(150000)
+                Menu.BARBEQUE_RIB,
+                Menu.BARBEQUE_RIB,
+                Menu.BARBEQUE_RIB
         ));
 
         // when
@@ -34,7 +35,7 @@ class GiftDispenserTest {
         // given
         GiftDispenser dispenser = new GiftDispenser();
         Basket basket = new Basket(List.of(
-                new TestMenu(10000)
+                Menu.BARBEQUE_RIB
         ));
 
         // when

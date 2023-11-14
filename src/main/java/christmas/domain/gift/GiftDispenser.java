@@ -1,14 +1,14 @@
 package christmas.domain.gift;
 
 import christmas.domain.menu.Basket;
-import christmas.domain.menu.Champagne;
+import christmas.domain.menu.Menu;
 
 public class GiftDispenser {
     private static final int GIFT_TARGET_MINIMUM_PRICE = 120000;
 
     public void giveGift(Basket basket) {
         if(isGiftTarget(basket)) {
-            basket.addGift(new Champagne());
+            basket.addGift(Menu.CHAMPAGNE);
         }
     }
 

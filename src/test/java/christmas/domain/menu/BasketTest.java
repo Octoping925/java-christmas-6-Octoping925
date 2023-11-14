@@ -14,42 +14,39 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Basket은")
 class BasketTest {
     @DisplayName("장바구니에 있는 메뉴의 가격 총합을 반환한다")
-    @ParameterizedTest
-    @MethodSource("provideMenusAndTotalPrice")
-    void calculateTotalPrice(List<Integer> prices, int expectedTotalPrice) {
+    @Test
+    void calculateTotalPrice() {
         // given
-        List<Menu> menus = MenuFixture.provideMenusByPrice(prices);
+        List<Menu> menus = List.of(
+                Menu.CHOCOLATE_CAKE,
+                Menu.BARBEQUE_RIB,
+                Menu.ICECREAM
+        );
+
         Basket basket = new Basket(menus);
 
         // when
         int totalPrice = basket.getTotalPrice();
 
         // then
-        assertThat(totalPrice).isEqualTo(expectedTotalPrice);
+        assertThat(totalPrice).isEqualTo(74000);
     }
 
     @DisplayName("장바구니 안의 메뉴를 필터링해서 검색할 수 있다")
     @Test
     void searchMenu() {
         // given
-        Menu menu1 = new TestMenu(MenuType.MAIN_DISH);
-        Menu menu2 = new TestMenu(MenuType.DRINK);
-        Menu menu3 = new TestMenu(MenuType.DRINK);
-        Menu menu4 = new TestMenu(MenuType.DESSERT);
-        Basket basket = new Basket(List.of(menu1, menu2, menu3, menu4));
+        Basket basket = new Basket(List.of(
+                Menu.CHOCOLATE_CAKE,
+                Menu.BARBEQUE_RIB,
+                Menu.BARBEQUE_RIB,
+                Menu.RED_WINE
+        ));
 
         // when
         List<Menu> searchResult = basket.searchMenu(Menu::isDrink);
 
         // then
-        assertThat(searchResult).contains(menu2, menu3);
-    }
-
-    private static Stream<Arguments> provideMenusAndTotalPrice() {
-        return Stream.of(
-                Arguments.of(List.of(1000, 2000, 3000), 6000),
-                Arguments.of(List.of(1000, 2000, 3000, 4000), 10000),
-                Arguments.of(List.of(), 0)
-        );
+        assertThat(searchResult).contains(Menu.RED_WINE);
     }
 }

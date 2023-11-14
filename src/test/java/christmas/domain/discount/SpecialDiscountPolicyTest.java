@@ -1,7 +1,7 @@
 package christmas.domain.discount;
 
 import christmas.domain.menu.Basket;
-import christmas.domain.menu.MenuFixture;
+import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +22,7 @@ class SpecialDiscountPolicyTest {
         // given
         Supplier<LocalDate> currentDateSupplier = () -> LocalDate.of(2023, 12, day);
         DiscountPolicy discountPolicy = new SpecialDiscountPolicy(currentDateSupplier);
-        Basket basket = new Basket(MenuFixture.provideMenusByPrice(List.of(10000)));
+        Basket basket = new Basket(List.of(Menu.BARBEQUE_RIB));
 
         // when
         int discountPrice = discountPolicy.discount(basket);
@@ -37,7 +37,7 @@ class SpecialDiscountPolicyTest {
         // given
         Supplier<LocalDate> currentDateSupplier = () -> LocalDate.of(2023, 12, 1);
         DiscountPolicy discountPolicy = new SpecialDiscountPolicy(currentDateSupplier);
-        Basket basket = new Basket(MenuFixture.provideMenusByPrice(List.of(10000)));
+        Basket basket = new Basket(List.of(Menu.BARBEQUE_RIB));
 
         // when
         int discountPrice = discountPolicy.discount(basket);

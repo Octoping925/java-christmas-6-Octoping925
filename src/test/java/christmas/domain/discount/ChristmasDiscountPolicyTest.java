@@ -1,7 +1,7 @@
 package christmas.domain.discount;
 
 import christmas.domain.menu.Basket;
-import christmas.domain.menu.TestMenu;
+import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,8 +28,8 @@ class ChristmasDiscountPolicyTest {
         ChristmasDiscountPolicy discountPolicy = new ChristmasDiscountPolicy(beforeChristmas);
 
         Basket basket = new Basket(List.of(
-                new TestMenu(10000),
-                new TestMenu(10000)
+                Menu.SEAFOOD_PASTA,
+                Menu.SEAFOOD_PASTA
         ));
 
         // when
@@ -47,8 +47,8 @@ class ChristmasDiscountPolicyTest {
         ChristmasDiscountPolicy discountPolicy = new ChristmasDiscountPolicy(afterChristmas);
 
         Basket basket = new Basket(List.of(
-                new TestMenu(10000),
-                new TestMenu(10000)
+                Menu.SEAFOOD_PASTA,
+                Menu.SEAFOOD_PASTA
         ));
 
         // when

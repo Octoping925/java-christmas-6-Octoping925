@@ -1,7 +1,7 @@
 package christmas.domain.discount;
 
 import christmas.domain.menu.Basket;
-import christmas.domain.menu.TestMenu;
+import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +20,7 @@ class DiscountCalculatorTest {
                 getDiscountPolicyByDiscountPrice(500)
         );
 
-        Basket basket = new Basket(List.of(
-                new TestMenu(10000),
-                new TestMenu(20000),
-                new TestMenu(30000)
-        ));
+        Basket basket = new Basket(List.of(Menu.BARBEQUE_RIB));
 
         // when
         DiscountResult discountResult = calculator.calculate(basket);
