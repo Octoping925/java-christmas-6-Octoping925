@@ -1,5 +1,6 @@
 package christmas.view.output;
 
+import christmas.domain.badge.Badge;
 import christmas.domain.discount.DiscountResult;
 import christmas.domain.menu.Basket;
 import christmas.domain.menu.Menu;
@@ -49,33 +50,50 @@ public class OutputView {
 
     public void printDiscountHistory(Basket basket, DiscountResult discountResult) {
         printBenefitHistory(basket, discountResult);
-        printTotalBenefitPrice(discountResult, basket.getGiftMenus());
+        printTotalBenefitPrice(discountResult, basket.getTotalGiftPrice());
         print("");
     }
 
+    public void printExpectedPrice(Basket basket, DiscountResult discountResult) {
+        int totalPrice = basket.getTotalPrice();
+        int totalDiscountPrice = discountResult.totalDiscountPrice();
+
+        int expectedPrice = totalPrice - totalDiscountPrice;
+
+        print("<할인 후 예상 결제 금액>");
+        print(commarize(expectedPrice) + "원");
+    }
+
+    public void printBadge(Badge badge) {
+        print("<12월 이벤트 배지>");
+        print(badge.getName());
+    }
+
     private void printBenefitHistory(Basket basket, DiscountResult discountResult) {
-        List<DiscountResult.DiscountHistory> discountHistories = discountResult.discountHistories();
+        printDiscountHistory(discountResult.discountHistories());
+        printGiftHistory(basket);
+    }
 
+    private void printDiscountHistory(List<DiscountResult.DiscountHistory> discountHistories) {
         print("<혜택 내역>");
+        if (discountHistories.isEmpty()) {
+            print("없음");
+            return;
+        }
+
         discountHistories.forEach(discountHistory -> print(discountHistory.discountName() + ": -" + commarize(discountHistory.discountPrice()) + "원"));
+    }
 
-        Map<Menu, Integer> giftMenus = basket.getGiftMenus();
-        if(!giftMenus.isEmpty()) {
-            int giftPrice = giftMenus.keySet().stream()
-                    .mapToInt(Menu::getPrice)
-                    .sum();
-
+    private void printGiftHistory(Basket basket) {
+        int giftPrice = basket.getTotalGiftPrice();
+        if (giftPrice > 0) {
             print("증정 이벤트: -" + giftPrice + "원");
         }
     }
 
-    private void printTotalBenefitPrice(DiscountResult discountResult, Map<Menu, Integer> giftMenus) {
-        int giftTotalPrice = giftMenus.keySet().stream()
-                .mapToInt(Menu::getPrice)
-                .sum();
-        
+    private void printTotalBenefitPrice(DiscountResult discountResult, int giftTotalPrice) {
         int totalBenefitPrice = discountResult.totalDiscountPrice() + giftTotalPrice;
-        
+
         print("<총혜택 금액>");
         print(totalBenefitPrice + "원");
     }
