@@ -1,10 +1,6 @@
 package christmas.domain.menu;
 
-import christmas.domain.menu.Menu;
-
-import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -24,6 +20,13 @@ public class Basket {
 
     public int getTotalPrice() {
         return menus.entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
+                .sum();
+    }
+
+    public int getTotalGiftPrice() {
+        return giftMenus.entrySet()
                 .stream()
                 .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
