@@ -1,14 +1,17 @@
 package christmas.basket.domain;
 
 import christmas.menu.domain.Menu;
+import christmas.menu.domain.MenuType;
 import christmas.menu.domain.TestMenu;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,6 +31,25 @@ class BasketTest {
 
         // then
         assertThat(totalPrice).isEqualTo(expectedTotalPrice);
+    }
+
+    @DisplayName("장바구니 안의 메뉴를 필터링해서 검색할 수 있다")
+    @Test
+    void searchMenu() {
+        // given
+        Menu menu1 = new TestMenu(MenuType.MAIN_DISH);
+        Menu menu2 = new TestMenu(MenuType.DRINK);
+        Menu menu3 = new TestMenu(MenuType.DRINK);
+        Menu menu4 = new TestMenu(MenuType.DESSERT);
+        Basket basket = new Basket(List.of(menu1, menu2, menu3, menu4));
+
+        Predicate<Menu> isDrink = menu -> menu.getMenuType() == MenuType.DRINK;
+
+        // when
+        List<Menu> searchResult = basket.searchMenu(isDrink);
+
+        // then
+        assertThat(searchResult).contains(menu2, menu3);
     }
 
     private static Stream<Arguments> provideMenusAndTotalPrice() {

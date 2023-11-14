@@ -4,6 +4,7 @@ import christmas.menu.domain.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Basket {
     private final List<Menu> menus;
@@ -18,5 +19,11 @@ public class Basket {
         return menus.stream()
                 .mapToInt(Menu::getPrice)
                 .sum();
+    }
+
+    public List<Menu> searchMenu(Predicate<Menu> predicate) {
+        return menus.stream()
+                .filter(predicate)
+                .toList();
     }
 }
