@@ -5,7 +5,6 @@ import christmas.domain.menu.Menu;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public class WeekendDiscountPolicy extends DiscountPolicy {
