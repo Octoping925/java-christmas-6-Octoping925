@@ -15,6 +15,14 @@ public class Basket {
         this.giftMenus = new ArrayList<>();
     }
 
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
+    public List<Menu> getGiftMenus() {
+        return giftMenus;
+    }
+
     public int getTotalPrice() {
         return menus.stream()
                 .mapToInt(Menu::getPrice)
@@ -25,5 +33,9 @@ public class Basket {
         return menus.stream()
                 .filter(predicate)
                 .toList();
+    }
+
+    public void addGift(Menu champagne) {
+        giftMenus.add(champagne);
     }
 }

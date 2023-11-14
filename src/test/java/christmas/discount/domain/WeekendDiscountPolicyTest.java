@@ -1,10 +1,8 @@
 package christmas.discount.domain;
 
 import christmas.basket.domain.Basket;
-import christmas.menu.domain.Menu;
 import christmas.menu.domain.MenuFixture;
 import christmas.menu.domain.MenuType;
-import christmas.menu.domain.TestMenu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +10,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
