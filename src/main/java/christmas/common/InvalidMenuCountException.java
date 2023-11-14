@@ -2,6 +2,6 @@ package christmas.common;
 
 public class InvalidMenuCountException extends ChristmasEventException {
     public InvalidMenuCountException() {
-        super("메뉴 개수는 1 이상의 숫자여야 합니다");
+        super("유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 }
