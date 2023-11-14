@@ -26,4 +26,8 @@ public abstract class Menu {
     public boolean isDrink() {
         return menuType == MenuType.DRINK;
     }
+
+    public boolean isMainDish() {
+        return menuType == MenuType.MAIN_DISH;
+    }
 }
