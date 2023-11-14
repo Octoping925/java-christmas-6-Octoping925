@@ -12,6 +12,7 @@ public class ChristmasDiscountPolicy extends DiscountPolicy {
     private final Supplier<LocalDate> currentDateTimeSupplier;
 
     public ChristmasDiscountPolicy(Supplier<LocalDate> currentDateTimeSupplier) {
+        super("크리스마스 디데이 할인");
         this.currentDateTimeSupplier = currentDateTimeSupplier;
     }
 

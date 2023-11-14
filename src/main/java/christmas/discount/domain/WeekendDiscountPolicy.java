@@ -12,6 +12,7 @@ public class WeekendDiscountPolicy extends DiscountPolicy {
     private final Supplier<LocalDate> currentDateTimeSupplier;
 
     public WeekendDiscountPolicy(Supplier<LocalDate> currentDateTimeSupplier) {
+        super("주말 할인");
         this.currentDateTimeSupplier = currentDateTimeSupplier;
     }
 

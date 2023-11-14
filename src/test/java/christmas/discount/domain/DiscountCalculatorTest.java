@@ -27,14 +27,20 @@ class DiscountCalculatorTest {
         ));
 
         // when
-        int totalDiscountPrice = calculator.calculate(basket);
+        DiscountResult discountResult = calculator.calculate(basket);
 
         // then
-        assertThat(totalDiscountPrice).isEqualTo(1500);
+        assertThat(discountResult.totalDiscountPrice()).isEqualTo(1500);
+
+        assertThat(discountResult.discountHistories().get(0).discountName()).isEqualTo("테스트 할인 1000");
+        assertThat(discountResult.discountHistories().get(0).discountPrice()).isEqualTo(1000);
+
+        assertThat(discountResult.discountHistories().get(1).discountName()).isEqualTo("테스트 할인 500");
+        assertThat(discountResult.discountHistories().get(1).discountPrice()).isEqualTo(500);
     }
 
     private DiscountPolicy getDiscountPolicyByDiscountPrice(int discountPrice) {
-        return new DiscountPolicy() {
+        return new DiscountPolicy("테스트 할인 " + discountPrice) {
             @Override
             protected int calculateDiscountPrice(Basket basket) {
                 return discountPrice;

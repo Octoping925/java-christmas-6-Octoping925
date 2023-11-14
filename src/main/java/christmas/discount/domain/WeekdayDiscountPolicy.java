@@ -13,6 +13,7 @@ public class WeekdayDiscountPolicy extends DiscountPolicy {
     private final Supplier<LocalDate> currentDateTimeSupplier;
 
     public WeekdayDiscountPolicy(Supplier<LocalDate> currentDateTimeSupplier) {
+        super("평일 할인");
         this.currentDateTimeSupplier = currentDateTimeSupplier;
     }
 

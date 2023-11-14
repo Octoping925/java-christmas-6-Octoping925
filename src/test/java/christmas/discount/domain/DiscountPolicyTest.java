@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("DiscountPolicy 클래스는")
 class DiscountPolicyTest {
-    private static final DiscountPolicy discountPolicy = new DiscountPolicy() {
+    private static final DiscountPolicy discountPolicy = new DiscountPolicy("테스트 할인") {
         @Override
         public int calculateDiscountPrice(Basket basket) {
             return 1000;

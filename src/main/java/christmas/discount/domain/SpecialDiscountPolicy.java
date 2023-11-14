@@ -13,6 +13,7 @@ public class SpecialDiscountPolicy extends DiscountPolicy {
     private final Supplier<LocalDate> currentDateSupplier;
 
     public SpecialDiscountPolicy(Supplier<LocalDate> currentDateSupplier) {
+        super("특별 할인");
         this.currentDateSupplier = currentDateSupplier;
     }
 

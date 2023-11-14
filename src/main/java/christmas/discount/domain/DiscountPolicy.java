@@ -4,6 +4,15 @@ import christmas.basket.domain.Basket;
 
 public abstract class DiscountPolicy {
     private static final int MINIMUM_EVENT_PRICE = 10000;
+    private final String policyName;
+
+    protected DiscountPolicy(String policyName) {
+        this.policyName = policyName;
+    }
+
+    public String getPolicyName() {
+        return policyName;
+    }
 
     public final int discount(Basket basket) {
         if (!isDiscountTarget(basket)) {
