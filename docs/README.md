@@ -100,5 +100,5 @@
 ## 증정품 지급기 (GiftDispenser)
 - 장바구니를 받아, 증정품을 지급하는 기능
 
-## 배지 (BadgeService)
+## 배지 (BadgeFactory)
 - 총 혜택 금액을 받아, 증정될 배지를 반환
