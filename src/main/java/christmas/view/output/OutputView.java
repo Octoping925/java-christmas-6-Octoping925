@@ -19,7 +19,6 @@ public class OutputView {
 
     public void printRestaurantReservationDate() {
         print("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
-        print("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
     }
 
     public void printOrderMenuMessage() {
@@ -39,7 +38,7 @@ public class OutputView {
 
     public void printTotalPrice(int totalPrice) {
         print("<할인 전 총주문 금액>");
-        print(totalPrice + "원");
+        print(commarize(totalPrice) + "원");
         print("");
     }
 
@@ -87,7 +86,7 @@ public class OutputView {
     private void printGiftHistory(Basket basket) {
         int giftPrice = basket.getTotalGiftPrice();
         if (giftPrice > 0) {
-            print("증정 이벤트: -" + giftPrice + "원");
+            print("증정 이벤트: -" + commarize(giftPrice) + "원");
         }
     }
 
@@ -95,7 +94,7 @@ public class OutputView {
         int totalBenefitPrice = discountResult.totalDiscountPrice() + giftTotalPrice;
 
         print("<총혜택 금액>");
-        print(totalBenefitPrice + "원");
+        print(commarize(totalBenefitPrice) + "원");
     }
 
     private void print(String message) {
