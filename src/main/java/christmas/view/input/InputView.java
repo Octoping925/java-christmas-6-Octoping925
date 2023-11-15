@@ -32,6 +32,8 @@ public class InputView {
     public Map<Menu, Integer> getMenuAndCount() {
         return doLoop(() -> {
             String input = getInputWithMessage("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
+            validateInputEmpty(input);
+
             List<String> inputMenus = List.of(input.split(","));
             validateInputMenus(inputMenus);
 
@@ -74,20 +76,24 @@ public class InputView {
     }
 
     private void validateInputMenus(List<String> inputMenus) {
-        validateInputMenuEmpty(inputMenus);
         validateInputMenuDuplicate(inputMenus);
 
         inputMenus.forEach(this::validateInputMenu);
     }
 
-    private void validateInputMenuEmpty(List<String> inputMenus) {
-        if(inputMenus.isEmpty()) {
+    private void validateInputEmpty(String input) {
+        if(input.isBlank()) {
             throw new InvalidBasketSizeException();
         }
     }
 
     private void validateInputMenuDuplicate(List<String> inputMenus) {
-        if(inputMenus.stream().distinct().count() != inputMenus.size()) {
+        long distinctCount = inputMenus.stream()
+                .map(inputMenu -> inputMenu.split("-")[0])
+                .distinct()
+                .count();
+
+        if(distinctCount != inputMenus.size()) {
             throw new DuplicateMenuException();
         }
     }
