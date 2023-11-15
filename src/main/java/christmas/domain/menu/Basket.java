@@ -21,14 +21,14 @@ public class Basket {
     public int getTotalPrice() {
         return menus.entrySet()
                 .stream()
-                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
+                .mapToInt(entry -> getPrice(entry.getKey(), entry.getValue()))
                 .sum();
     }
 
     public int getTotalGiftPrice() {
         return giftMenus.entrySet()
                 .stream()
-                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
+                .mapToInt(entry -> getPrice(entry.getKey(), entry.getValue()))
                 .sum();
     }
 
@@ -41,5 +41,9 @@ public class Basket {
 
     public void addGift(Menu gift) {
         giftMenus.put(gift, giftMenus.getOrDefault(gift, 0) + 1);
+    }
+
+    private int getPrice(Menu menu, int count) {
+        return menu.getPrice() * count;
     }
 }
