@@ -43,7 +43,7 @@ class InputViewTest {
         class RetryInput {
             @DisplayName("입력 방문 날짜가 1보다 작으면 입력을 다시 받는다")
             @ParameterizedTest
-            @ValueSource(strings = { "-1", "0" })
+            @ValueSource(strings = {"-1", "0"})
             void getVisitDate(String invalidInput) {
                 checkInvalidInputLoop(invalidInput);
             }
@@ -110,7 +110,7 @@ class InputViewTest {
 
             @DisplayName("메뉴의 총합 개수가 20 초과라면 입력을 다시 받는다")
             @ParameterizedTest
-            @ValueSource(strings = { "티본스테이크-21", "티본스테이크-5,바비큐립-10,초코케이크-7"})
+            @ValueSource(strings = {"티본스테이크-21", "티본스테이크-5,바비큐립-10,초코케이크-7"})
             void getMenuAndCount2(String invalidInput) {
                 checkInvalidInputLoop(invalidInput);
             }
@@ -140,8 +140,8 @@ class InputViewTest {
             @DisplayName("메뉴의 이름이 유효하지 않으면 입력을 다시 받는다")
             @ParameterizedTest
             @ValueSource(strings = {
-              "냉장고-1,바비큐립-1",
-              "-1,바비큐립-1",
+                    "냉장고-1,바비큐립-1",
+                    "-1,바비큐립-1",
             })
             void getMenuAndCount6(String invalidInput) {
                 checkInvalidInputLoop(invalidInput);
@@ -184,7 +184,7 @@ class InputViewTest {
         }
     }
 
-    private Supplier<String> createMockSupplier(String ...args) {
+    private Supplier<String> createMockSupplier(String... args) {
         Supplier<String> mockedSupplier = mock(Supplier.class);
         OngoingStubbing<String> when = when(mockedSupplier.get());
         for (String arg : args) {
