@@ -76,9 +76,8 @@ public class InputView {
     }
 
     private void validateInputMenus(List<String> inputMenus) {
-        validateInputMenuDuplicate(inputMenus);
-
         inputMenus.forEach(this::validateInputMenu);
+        validateInputMenuDuplicate(inputMenus);
     }
 
     private void validateInputEmpty(String input) {
@@ -100,10 +99,21 @@ public class InputView {
 
     private void validateInputMenu(String inputMenu) {
         String[] menuNameAndCount = inputMenu.split("-");
-        validateMenuCountIsNumber(menuNameAndCount[1]);
+        validateMenuNameAndCount(menuNameAndCount);
 
         int menuCount = Integer.parseInt(menuNameAndCount[1]);
         validateMenuCountIsPositive(menuCount);
+    }
+
+    private void validateMenuNameAndCount(String[] menuNameAndCount) {
+        validateMenuAndCountIsTwoLength(menuNameAndCount);
+        validateMenuCountIsNumber(menuNameAndCount[1]);
+    }
+
+    private void validateMenuAndCountIsTwoLength(String[] menuNameAndCount) {
+        if(menuNameAndCount.length != 2) {
+            throw new InvalidMenuCountException();
+        }
     }
 
     private void validateMenuCountIsPositive(int menuCount) {
