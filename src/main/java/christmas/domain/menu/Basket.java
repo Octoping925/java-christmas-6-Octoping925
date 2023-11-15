@@ -40,7 +40,7 @@ public class Basket {
     }
 
     public void addGift(Menu gift) {
-        giftMenus.put(gift, giftMenus.getOrDefault(gift, 0) + 1);
+        giftMenus.merge(gift, 1, Integer::sum);
     }
 
     private int getPrice(Menu menu, int count) {
